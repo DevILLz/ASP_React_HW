@@ -6,8 +6,7 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context,
-            UserManager<AppUser> userManager)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
             if (!userManager.Users.Any())
             {
@@ -17,7 +16,14 @@ namespace Persistence
                     DisplayName = "Admin",
                     Email = "admin@skillbox.com",
                 };
+                var user2 = new AppUser
+                {
+                    UserName = "Unknown",
+                    DisplayName = "Unknown",
+                    Email = "Unknown@skillbox.com",
+                };
                 await userManager.CreateAsync(user, "Password1");
+                await userManager.CreateAsync(user2, "Password1");
 
                 var notes = new List<Note>
                 {
@@ -55,6 +61,28 @@ namespace Persistence
                         Creator = user,
                         CreationDate = DateTime.Now.AddDays(12)
                     },
+                    new Note
+                    {
+                        FirstName = "Астап",
+                        SecondName = "Бендер",
+                        ThridName = "",
+                        PhoneNumber = "+78888882211",
+                        Address = "Кострома",
+                        Description = "",
+                        Creator = user2,
+                        CreationDate = DateTime.Now.AddDays(1)
+                    },
+                    new Note
+                    {
+                        FirstName = "Карл",
+                        SecondName = "Маркс",
+                        ThridName = "",
+                        PhoneNumber = "+66666666666",
+                        Address = "Мир",
+                        Description = "",
+                        Creator = user2,
+                        CreationDate = DateTime.Now.AddDays(1)
+                    }
                 };
 
                 await context.Notes.AddRangeAsync(notes);
