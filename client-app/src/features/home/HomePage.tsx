@@ -12,12 +12,12 @@ export default observer(function HomePage() {
             <Container text>
                 <Header as='h1' inverted >
                     <Image size='massive' src='/assets/Logo.png' alt='logo' style={{ marginBottom: 12 }} />
-                    Reactivites
+                    Notebook
                 </Header>
                 {userStore.isLoggedIn
                     ? (<>
-                        <Header as='h2' inverted content='Welcome to Reactivites' />
-                        <Button as={Link} to='/Activities' size='huge' inverted content="GoToActivities!" />
+                        <Header as='h2' inverted content='Welcome to Notebook' />
+                        <Button as={Link} to='/notes' size='huge' inverted content="Go To Notes!" />
                     </>)
                     : (<>
 

@@ -1,12 +1,13 @@
-using Application.Activities;
 using Application.Core;
-using Application.interfaces;
-using Infrastructure.Photos;
-using Infrastructure.Security;
+using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using Persistence;
+using Application.Notes;
+using Application.interfaces;
+using Infrastructure.Security;
 
 namespace API.Extensions
 {
@@ -14,27 +15,30 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddControllers(opt => 
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv6", Version = "v1" });
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            services.AddFluentValidation(config => 
+            {
+                config.RegisterValidatorsFromAssemblyContaining<Create>();
+            });
+
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                opt.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => {
                     policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithOrigins("http://localhost:3000");
                 });
             });
-            // services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddMediatR(typeof(Application.Activities.Create).Assembly);
-            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddMediatR(typeof(Create).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
-            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
-            services.AddSignalR();
-            services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            //services.AddSignalR();
             
             return services;
         }

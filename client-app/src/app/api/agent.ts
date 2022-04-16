@@ -1,10 +1,9 @@
 import { User, UserFormValues } from './../models/user';
 import { store } from './../stores/store';
-import { Activity, ActivityFormValues } from 'app/models/activity';
+import { note, noteFormValues } from 'app/models/note';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { history } from 'index';
 import { toast } from 'react-toastify';
-import { Photo, Profile } from 'app/models/profile';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -65,39 +64,22 @@ const requests = {
     put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
     delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
-const Activities = {
-    list: () => requests.get<Activity[]>('/activities'),
-    details: (id: string) => requests.get<Activity>(`/activities/${id}`),
-    create: (activity: ActivityFormValues) => requests.post<void>(`/activities/`, activity),
-    update: (activity: ActivityFormValues) => requests.put<void>(`/activities/${activity.id}`, activity),
-    delete: (id: string) => requests.delete<void>(`/activities/${id}`),
-    attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {}),
+const Notes = {
+    list: () => requests.get<note[]>('/notes'),
+    details: (id: string) => requests.get<note>(`/notes/${id}`),
+    create: (note: noteFormValues) => requests.post<void>(`/notes/`, note),
+    update: (note: noteFormValues) => requests.put<void>(`/notes/${note.id}`, note),
+    delete: (id: string) => requests.delete<void>(`/notes/${id}`),
 }
-
 const Account = {
     current: () => requests.get<User>(`/account`),
     login: (user: UserFormValues) => requests.post<User>(`/account/login`, user),
     register: (user: UserFormValues) => requests.post<User>(`/account/register`, user),
 }
 
-const Profiles = {
-    get: (userName: string) => requests.get<Profile>(`/profiles/${userName}`),
-    uploadPhoto: (file: Blob) => {
-        let formData = new FormData();
-        formData.append('File',file);
-        return axios.post<Photo>('photos', formData, {
-            headers: {'Content-type': 'multipart/form-data'}
-        })
-    },
-    setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-    deletePhoto: (id: string) => requests.delete(`/photos/${id}`),
-    updateFollowing: (userName: string) => requests.post(`/follow/${userName}`, {}),
-    listFollowing: (userName: string, predicate:string) => requests.get<Profile[]>(`/follow/${userName}?predicate=${predicate}`)
-}
-
 const agent = {
-    Activities,
+    Notes,
     Account,
-    Profiles
+    
 }
 export default agent;

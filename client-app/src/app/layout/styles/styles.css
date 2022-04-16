@@ -1,5 +1,5 @@
 @import 'semantic-ui-css/semantic.min.css';
-@import './AngstremStyles.css';
+@import './styleSobre.css';
 .ui.inverted.top.fixed.menu {
   background: linear-gradient(0deg, #cccccc , #347392);
 }

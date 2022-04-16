@@ -20,7 +20,7 @@ export default class UserStore {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
             runInAction(() =>{this.user = user;});
-            history.push('/activities');
+            history.push('/notes');
             store.modalStore.closeModal();
         }
         catch (err) {
@@ -47,15 +47,11 @@ export default class UserStore {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
             runInAction(() =>{this.user = user;});
-            history.push('/activities');
+            history.push('/notes');
             store.modalStore.closeModal();
         }
         catch (err) {
             throw err;
         }
-    }
-    setImage = (image: string) => {
-        if (this.user)
-            this.user.image = image
     }
 }

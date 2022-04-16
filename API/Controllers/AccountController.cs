@@ -26,8 +26,7 @@ namespace API.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.Users.Include(p => p.Photos)
-                .FirstOrDefaultAsync(x => x.Email == loginDto.Email);
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == loginDto.Email || x.UserName == loginDto.Email);
             if (user == null) return Unauthorized();
             var result = await this._signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
             if (result.Succeeded) return CreateUserObject(user);
@@ -61,7 +60,7 @@ namespace API.Controllers
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser(){
-            var user = await _userManager.Users.Include(p => p.Photos)
+            var user = await _userManager.Users
             .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
             return CreateUserObject(user);
         }
@@ -72,7 +71,6 @@ namespace API.Controllers
             {
                 UserName = user.UserName,
                 DisplayName = user.DisplayName,
-                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
                 Token = _tokenService.CreateToken(user)
             };
         }

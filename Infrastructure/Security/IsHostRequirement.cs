@@ -26,14 +26,14 @@ namespace Infrastructure.Security
         {
             var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Task.CompletedTask;
-            var activityId = Guid.Parse(contextAccessor.HttpContext?.Request.RouteValues
+            var noteId = Guid.Parse(contextAccessor.HttpContext?.Request.RouteValues
             .SingleOrDefault(x => x.Key == "id").Value?.ToString() ?? "");
 
-            var attendee = this.context.ActivityAttendees
+            var note = this.context.Notes
             .AsNoTracking()
-            .SingleOrDefault(x => x.AppUserId == userId && x.ActivityId == activityId);
-            if (attendee == null) return Task.CompletedTask;
-            if (attendee.IsHost) context.Succeed(requirement);
+            .SingleOrDefault(x => x.Id == noteId);
+            if (note == null) return Task.CompletedTask;
+            context.Succeed(requirement);
             return Task.CompletedTask;
         }
     }

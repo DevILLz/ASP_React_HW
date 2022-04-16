@@ -24,7 +24,7 @@ export default observer(function LoginForm() {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className="error" onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Sign up to Reactivites' textAlign='center'/>
+                    <Header as='h2' content='Sign up to Notebook' textAlign='center'/>
                     <MyTextInput name='displayName' placeholder='DisplayName' />
                     <MyTextInput name='username' placeholder='UserName' />
                     <MyTextInput name='email' placeholder='Email' />

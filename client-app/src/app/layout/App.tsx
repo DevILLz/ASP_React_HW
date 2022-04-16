@@ -1,12 +1,11 @@
 import { Container } from 'semantic-ui-react';
-import ActivityDashboard from 'features/activities/dashboard/ActivityDashboard';
+import NoteDashboard from 'features/notes/dashboard/NoteDashboard';
 import NavBar from './NavBar';
 import { observer } from 'mobx-react-lite';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage'
-import ActivityForm from 'features/activities/form/ActivityForm'
-import ActivityDetails from 'features/activities/details/ActivityDetails';
-import TestErrors from 'features/errors/TestError';
+import NoteForm from 'features/notes/form/NoteForm'
+import NoteDetails from 'features/notes/details/NoteDetails';
 import { ToastContainer } from 'react-toastify';
 import NotFound from 'features/errors/NotFound';
 import ServerError from 'features/errors/ServerError';
@@ -14,7 +13,6 @@ import { useStore } from 'app/stores/store';
 import { useEffect } from 'react';
 import LoadingComponent from './LoadingComponents';
 import ModalContainer from 'app/common/modals/ModalContainer';
-import ProfilePage from 'features/profiles/ProfilePage';
 import PrivateRoute from './PrivateRoute';
 function App() {
   const location = useLocation();
@@ -41,11 +39,9 @@ function App() {
             <NavBar />
             <Container style={{ marginTop: '65px' }}>
               <Switch>
-                <PrivateRoute exact path='/activities' component={ActivityDashboard} />
-                <PrivateRoute path='/activities/:id' component={ActivityDetails} />
-                <PrivateRoute path='/profiles/:userName' component={ProfilePage} />
-                <PrivateRoute key={location.key} path={['/createActivity', '/manage/:id']} component={ActivityForm} />
-                <Route path='/errors' component={TestErrors} />
+                <PrivateRoute exact path='/notes' component={NoteDashboard} />
+                <PrivateRoute path='/notes/:id' component={NoteDetails} />
+                <PrivateRoute key={location.key} path={['/createnote', '/manage/:id']} component={NoteForm} />
                 <Route path='/server-error' component={ServerError} />
                 <Route component={NotFound} />
               </Switch>

@@ -17,7 +17,7 @@ export default observer(function LoginForm() {
         >
             {({ handleSubmit, isSubmitting, errors }) => (
                 <Form onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Log in to Reactivites' textAlign='center'/>
+                    <Header as='h2' content='Log in to Notebook' textAlign='center'/>
                     <MyTextInput name='email' placeholder='Email' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
                     <ErrorMessage
