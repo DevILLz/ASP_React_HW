@@ -1,0 +1,82 @@
+@import './AngstremColors.css';
+
+  body, button, .button,
+  .ui.inverted.top.fixed.menu,
+  .react-datepicker
+  {
+    background: var(--MainLightColor) !important;
+  }
+  .secondary, .top.attached, .react-calendar__navigation, .menu, .card,
+  .button:hover
+  {
+    background:var(--MainMediumColor) !important;
+  }
+   input, textarea, .active:not(.dropdown), .selection{
+    background: var(--MainDarkColor) !important;
+  }
+  .basic, #basic, .text, div, .content,
+  .react-calendar__navigation__arrow, .react-calendar__navigation__label
+  {
+    background: none !important;
+  }
+  .ui, a, span, button, .text, input, textarea, .item:hover
+  {
+    color: var(--textColor) !important;
+  }
+  .react-calendar__month-view__days__day--neighboringMonth, div,
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
+    color: var(--textDarkColor) !important;
+  }
+    a:hover{
+    color: var(--textHoverColor) !important;
+  }
+  .button, .item, .menu, .ui.vertical.menu>.item:last-child{
+    border-radius: 0 !important;
+  }
+  .ui.attached.header, .ui.segment, .react-calendar__navigation, .react-calendar, .button, .ui.menu, .visible:not(.dropdown, .popup),
+  .Toastify__toast-theme--light{
+    border-left: 1px solid var(--LightBorderColor) !important;
+    border-top: 1px solid var(--LightBorderColor) !important;
+    border-right: 1px solid var(--DarkBorderColor) !important;
+    border-bottom: 1px solid var(--DarkBorderColor) !important;  
+  }
+  .selection, input, textarea{
+    border-left: 1px solid var(--DarkBorderColor) !important;
+    border-top: 1px solid var(--DarkBorderColor) !important;
+    border-right: 1px solid var(--LightBorderColor) !important;
+    border-bottom: 1px solid var(--LightBorderColor) !important;  
+  }
+  #itemHeader, .ui.basic, #basic,
+  .popup{
+    border: 0 !important;
+  }
+  .item, .ui.menu{
+    border-top: 0 !important; 
+  }
+  #red{
+    background: var(--MainDarkColor) !important;
+    color: var(--Red) !important;
+    border: 1px solid var(--Red) ;
+  }
+
+  .react-calendar__month-view__days__day--weekend,
+  .react-datepicker__day--weekend{
+    color: var(--Red) !important;
+  }
+  .react-calendar__tile--now,
+  .react-datepicker__day:hover,
+  .react-datepicker__time-list-item:hover{
+    background: var(--SemiCyan) !important;
+  }
+  .react-calendar__tile--active, .react-calendar__tile:hover, .react-calendar__navigation__label:hover, .react-calendar__navigation__arrow:hover, 
+  .react-datepicker__day--selected, .react-datepicker__time-list-item--selected,
+  .item:not(#itemHeader, #basic):hover{
+    background: var(--Cyan) !important;
+  }
+  .ui.error.message{
+    background: var(--DarkPaleRed) !important;
+    box-shadow: 0 0 0 1px var(--DarkRed) inset, 0 0 0 0 transparent !important;
+  }
+  .popup {
+    box-shadow: none !important;
+  }

@@ -1,0 +1,18 @@
+:root {
+    --Cyan: #347392;
+    --SemiCyan: #34739288;
+    --Red: #f34d4db6;
+    --DarkRed: #2b2222;
+    --DarkPaleRed: #413b3b;
+
+    --MainLightColor : #404545;
+    --MainMediumColor : #374040;
+    --MainDarkColor : #253034;
+
+    --LightBorderColor: #575959;
+    --DarkBorderColor: #292c2c;
+
+    --textColor : #CCCCCC;
+    --textDarkColor : #888888;
+    --textHoverColor : var(--Cyan);
+  }

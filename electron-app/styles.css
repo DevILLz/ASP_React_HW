@@ -1,0 +1,14 @@
+::-webkit-scrollbar {
+    display: none;
+}
+#ifr {
+    position: absolute;
+    top: 3%;
+    left: 0;
+    border: 0;
+    height: 97%;
+    width: 100%;
+}
+button {
+    margin: 0;
+}
